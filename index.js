@@ -51,6 +51,7 @@ calcularBtn.addEventListener("submit", (e) => {
         valor = addIcmsSimples(valorProduto, valorIcms());
         info1.innerText = `Valor do Produto em Dólar: ${valorConvertido.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}
         Valor do Produto em Reais: ${valorF}
-        Valor do ICMS (${valorIcms()}%): ${(valor - valorProduto).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}`;
+        Valor do ICMS (${valorIcms()}%): ${(valor - valorProduto).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}
+        Valor Final com ICMS: ${(valor).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}`;
     }
 })
