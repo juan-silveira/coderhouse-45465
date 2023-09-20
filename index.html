@@ -1,13 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desafio Complementar Aula 02</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles/index.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"
+        defer></script>
+    <script src="index.js" defer></script>
+    <title>Desafio Complementar Aula 04</title>
 </head>
-<body>
-    <h1>Desafio Complementar Aula 02</h1>
-    
-    <script src="index.js"></script>
+
+<body class="bg-dark">
+    <div class="container text-center text-white">
+        <h1>Desafio Complementar Aula 04</h1>
+        <h2>Calculadora Remessa Conforme</h2>
+        <p class="mt-5">• Produtos até 50 USD são tributados em 17%* de ICMS</p>
+        <p class="small">* Pode variar de acordo com cada estado</p>
+        <p class="mt-5">• Produtos acima de 50 USD são tributados em 60% + ICMS</p>
+
+        <form class="border p-5" id="calcular">
+            <h5>Cálculo do ICMS:</h5>
+            <p>Base Cálculo = (Valor Aduaneiro + Imposto de Importação(60%) / ( 1 - Alíquota ICMS )</p>
+            <p>Valor de ICMS Devido = Base Cálculo * Alíquota do ICMS</p>
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-3 mt-3">
+                    <label for="valorDolar" class="form-label">Preço USD</label>
+                    <input type="text" id="valorDolar" class="form-control"
+                        placeholder="Ex: 4.94">
+                        <small class="info">Padrão R$5.00 se deixar em branco</small>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3 mt-3">
+                    <label for="valorProduto" class="form-label">Valor do Produto R$</label>
+                    <input type="text" id="valorProduto" class="form-control"
+                        placeholder="Ex: 100.50" required>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3 mt-3">
+                    <label for="valorIcms" class="form-label">Alíquota de ICMS %</label>
+                    <input type="text" id="valorIcms" class="form-control"
+                        placeholder="(Ex: 17)">
+                        <small class="info">Padrão 17% se deixar em branco</small>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3 mt-3">
+                    <label for="calcular" class="form-label">Ver resultado</label>
+                    <button type="submit" class="btn btn-primary w-100">Calcular</button>
+                </div>
+            </div>
+            <div class="row mt-5" id="resultado">
+                <h4 id="title">Resultado:</h4>
+                <div class="col-12 mt-3">
+                    <p id="info1"></p>
+                    <p id="info2"></p>
+                    <p id="info3"></p>
+                    <p id="info4"></p>
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
+
 </html>
