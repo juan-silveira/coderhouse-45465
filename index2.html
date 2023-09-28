@@ -6,11 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="../styles/desafio2.css"> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"
         defer></script>
-    <script src="index.js" defer></script>
+    
     <title>Desafio Complementar Aula 06</title>
 </head>
 
@@ -19,11 +18,10 @@
         <h1>Desafio Complementar Aula 06</h1>
         <h2>Calculadora de Empréstimo</h2>
         <p class="mt-5">• Digite o valor que quer de empréstimo</p>
-        <p class="small">* Será adicionado juros de 20 a 100% no valor final</p>
+        <p class="small">* Será adicionado juros de 10 a 20% no valor final</p>
         <p class="mt-5">Escolha em quantos meses quer pagar e clique no botão para ver as parcelas</p>
 
         <form class="border p-5" id="calcular">
-
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-4 mt-3">
                     <label for="valorEmprestimo" class="form-label">Valor do Empréstimo R$</label>
@@ -33,25 +31,25 @@
                     <label for="selectParcelas" class="form-label">Quantidade de Parcelas (meses)</label>
                     <select class="form-select" id="selectParcelas" aria-label="Default select example" required>
                         <option selected disabled></option>
-                        <option value="1">12 meses (20% de Juros)</option>
-                        <option value="2">24 meses (50% de Juros)</option>
-                        <option value="3">36 meses (100% de Juros)</option>
+                        <option value="1">12 meses (10% de Juros)</option>
+                        <option value="2">24 meses (15% de Juros)</option>
+                        <option value="3">36 meses (20% de Juros)</option>
                     </select>
                     <small class="info">Quanto mais meses, mais juros</small>
                 </div>
                 <div class="col-12 col-md-6 col-lg-4 mt-3">
-                    <label for="ver" class="form-label">Ver parcelas</label>
-                    <button type="submit" class="btn btn-primary w-100" id="ver">Ver</button>
+                    <label for="calcular" class="form-label">Ver parcelas</label>
+                    <button type="submit" class="btn btn-primary w-100" id="calcular">Ver</button>
                 </div>
             </div>
-            <div class="row mt-5" id="resultado" style="display: none;">
-                <h3 id="title">PARCELAS:</h3>
-                <div class="col-12 mt-3">
-                    <p id="info"></p>
+            <div class="row mt-5" id="resultado">
+                <h4 id="title">Parcelas:</h4>
+                <div class="col-12 mt-3" id="parcelas">
                 </div>
             </div>
         </form>
     </div>
+    <script src="index.js"></script>
 </body>
 
 </html>
