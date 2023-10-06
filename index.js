@@ -1,38 +1,39 @@
-const calcularBtn = document.getElementById("calcular");
-calcularBtn.addEventListener("submit", (e) => {
-    e.preventDefault();
-    var valor = parseFloat(document.getElementById("valorEmprestimo").value);
-    const select = document.getElementById("selectParcelas").value;
-    const resultado = document.getElementById("resultado");
-    var info = document.getElementById("info");
-    info.innerHTML = "";
-    resultado.style.display = "block"
-    switch (select) {
-        case "1":
-            valor = valor * 1.2;
-            info.innerHTML = "<p><b>VALOR TOTAL: R$" + valor.toFixed(2) + "</b></p>";
-            for (i = 0; i < 12; i++) {
-                info.insertAdjacentHTML("beforeend", "<p>Parcela " + (i + 1) + ": " + "R$" + (valor/12).toFixed(2) + "</p>")
-            }
-            break;
-
-        case "2":
-            valor = valor * 1.5;
-            info.innerHTML = "<p><b>VALOR TOTAL: R$" + valor.toFixed(2) + "</b></p>";
-            for (i = 0; i < 24; i++) {
-                info.insertAdjacentHTML("beforeend", "<p>Parcela " + (i + 1) + ": " + "R$" + (valor/24).toFixed(2) + "</p>")
-            }
-            break;
-
-        case "3":
-            valor = valor * 2;
-            info.innerHTML = "<p><b>VALOR TOTAL: R$" + valor.toFixed(2) + "</b></p>";
-            for (i = 0; i < 36; i++) {
-                info.insertAdjacentHTML("beforeend", "<p>Parcela " + (i + 1) + ": " + "R$" + (valor/36).toFixed(2) + "</p>")
-            }
-            break;
-
-        default:
-            break;
+function aluno(nome, idade) {
+    this.nome = nome;
+    this.idade = parseInt(idade);
+    this.presente = false;
+    this.addPresenca = function () {
+        this.presente = true;
     }
-})
+}
+
+let turma = [];
+
+turma.push(new aluno("juan", "37"));
+turma.push(new aluno("maria", "21"));
+turma.push(new aluno("flávia", "34"));
+turma.push(new aluno("joão", "23"));
+turma.push(new aluno("ana", "33"));
+
+const idadeTurma = (turma) => {
+    var idade = 0;
+    turma.forEach(element => {
+        idade = element.idade + idade;
+    });
+    console.log("A idade da turma é: " + idade);
+}
+
+const presentesTurma = (turma) => {
+    var presentes = 0;
+    turma.forEach(element => {
+        if (element.presente == true) {
+            presentes++
+        };
+    });
+    console.log("Quantidade de alunos presentes: " + presentes);
+}
+
+turma[0].addPresenca();
+turma[3].addPresenca();
+idadeTurma(turma);
+presentesTurma(turma);
