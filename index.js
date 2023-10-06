@@ -1,19 +1,21 @@
-function aluno(nome, idade) {
+class Aluno {
+    constructor(nome, idade) {
     this.nome = nome;
     this.idade = parseInt(idade);
     this.presente = false;
-    this.addPresenca = function () {
+    }
+    addPresenca() {
         this.presente = true;
     }
 }
 
 let turma = [];
 
-turma.push(new aluno("juan", "37"));
-turma.push(new aluno("maria", "21"));
-turma.push(new aluno("flávia", "34"));
-turma.push(new aluno("joão", "23"));
-turma.push(new aluno("ana", "33"));
+turma.push(new Aluno("juan", "37"));
+turma.push(new Aluno("maria", "21"));
+turma.push(new Aluno("flávia", "34"));
+turma.push(new Aluno("joão", "23"));
+turma.push(new Aluno("ana", "33"));
 
 const idadeTurma = (turma) => {
     var idade = 0;
@@ -34,6 +36,7 @@ const presentesTurma = (turma) => {
 }
 
 turma[0].addPresenca();
+turma[1].addPresenca();
 turma[3].addPresenca();
 idadeTurma(turma);
 presentesTurma(turma);
