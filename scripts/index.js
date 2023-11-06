@@ -51,23 +51,29 @@ const quantidadeCursos = (cursos) => {
     return qde;
 }
 
-const removeItem = ({target}) => {
-    var index = "";
-    if(target.parentNode.id.startsWith("remove")){
-        index = target.parentNode.getAttribute("index") - 1;
+const removeItem = ({ target }) => {
+    var iCart = "";
+    var iCurso = "";
+    if (target.parentNode.id.startsWith("remove")) {
+        iCart = target.parentNode.getAttribute("index") - 1;
     } else {
-        index = target.getAttribute("index") - 1;
+        iCart = target.getAttribute("index") - 1;
     }
-    if(index >= 0 && index <= carrinho.length){
-        const btn = document.getElementById("curso" + index);
-        btn.removeAttribute("disabled");
-        cursos[index].onCart = false;
+    if (iCart >= 0 && iCart <= carrinho.length) {
+        var nomeCurso = carrinho[iCart].name;
+        cursos.forEach((e, i) => {
+            if (e.name == nomeCurso)
+                iCurso = i;
+        })
+        cursos[iCurso].onCart = false;
         Swal.fire({
             title: "Curso removido!",
-            text: "Curso " + carrinho[index].name + " removido do carrinho!",
+            text: "Curso " + carrinho[iCart].name + " removido do carrinho!",
             icon: 'success'
         })
-        carrinho.splice(index, 1);
+        carrinho.splice(iCart, 1);
+        const btn = document.getElementById("curso" + iCurso);
+        btn.removeAttribute("disabled");
     }
     cartNumber.innerText = quantidadeCursos(cursos);
     showCart();
@@ -78,21 +84,21 @@ const showCart = () => {
     const cart = document.getElementById("cart");
     cursos.forEach(e => {
         if (e.onCart == true) {
-            carrinho.push({name: e.name, price: e.price});
+            carrinho.push({ name: e.name, price: e.price });
         }
     });
-    if(carrinho.length == 0){
-        cart.style.display = "none";    
+    if (carrinho.length == 0) {
+        cart.style.display = "none";
         Swal.fire({
             title: 'Carrinho Vazio!',
             text: 'Adicione curso ao carrinho antes de ver o carrinho.',
             icon: 'error'
-          })
+        })
     } else {
         cart.style.display = "block";
         const cartTHead = document.getElementById("cartTHead");
         cartTHead.innerHTML = "";
-        cartTHead.innerHTML =  `<thead>
+        cartTHead.innerHTML = `<thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Curso</th>
@@ -103,21 +109,21 @@ const showCart = () => {
         const cartTBody = document.getElementById("cartTBody");
         cartTBody.innerHTML = "";
         var tValue = 0;
-        carrinho.forEach((e,i) => {
+        carrinho.forEach((e, i) => {
             cartTBody.insertAdjacentHTML("beforeend", `
             <tr>
                 <th scope="row">${i + 1}</th>
                 <td>${e.name}</td>
-                <td>${e.price.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</td>
+                <td>${e.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
                 <td class="remove" index="${i + 1}" id="remove${i + 1}"><i class="bi bi-trash text-danger"></i></td>
             </tr>`)
-            tValue += e.price; 
+            tValue += e.price;
         })
         cartTBody.insertAdjacentHTML("beforeend", `
             <tr>
                 <th scope="row"></th>
                 <td class="fw-bold">TOTAL:</td>
-                <td class="fw-bold">${tValue.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</td>
+                <td class="fw-bold">${tValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
                 <td></td>
             </tr>`
         )
