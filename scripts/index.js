@@ -180,7 +180,7 @@ const buildCart = () => {
     showCart();
 }
 
-// Verifica se a chave carrinho existe, e 
+// Verifica se a chave carrinho existe e se ela não é vazia, e se atender, constrói o carrinho
 if(localStorage.getItem("carrinho") && localStorage.getItem("carrinho") !== "[]"){
     buildCart();
 }
