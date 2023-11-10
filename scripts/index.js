@@ -11,6 +11,7 @@ class Curso {
 let cursos = [];
 let carrinho = [];
 
+//Popula o array de cursos com todos os cursos
 cursos.push(new Curso("0","Desenvolvimento Web", 199.50, "Curso criação de site com HTML, CSS, GIT, JavaScript, mercado programação, projeto final. Conhecimentos essenciais para desenvolvimento web."));
 cursos.push(new Curso("1","Javascript", 249.50, "Curso aborda fundamentos de linguagem de programação, jQuery, AJAX e desenvolvimento web interativo, preparando para frameworks JavaScript."));
 cursos.push(new Curso("2","React", 149.50, "Curso ensina pensamento em React JS, design eficiente, Firebase, prototipagem. Desenvolvimento de aplicações SPA focado no usuário final."));
@@ -27,6 +28,7 @@ const createElement = (tag, classNames) => {
     return element;
 }
 
+// Monta os cards dos cursos
 cursos.forEach((e, i) => {
     cursosCards.insertAdjacentHTML("beforeend", `
     <div class="col-md-4 mt-4">
@@ -41,6 +43,7 @@ cursos.forEach((e, i) => {
     `)
 });
 
+// Função para exibir a quantidade de cursos no ícone do carrinho no menu
 const quantidadeCursos = (cursos) => {
 
     var qde = 0;
@@ -52,6 +55,7 @@ const quantidadeCursos = (cursos) => {
     return qde;
 }
 
+// Função para remover um item do carrinho ao clicar no ícone de lixeira na tabela do carrinho
 const removeItem = ({ target }) => {
     var iCart = "";
     var iCurso = "";
@@ -77,9 +81,11 @@ const removeItem = ({ target }) => {
         btn.removeAttribute("disabled");
     }
     cartNumber.innerText = quantidadeCursos(cursos);
+    localStorage.setItem("carrinho", JSON.stringify(carrinho))
     showCart();
 }
 
+// Função para limpar os itens do carrinho e montar o carrinho com os cursos com o atributo onCart = true
 const showCart = () => {
     carrinho = [];
     const cart = document.getElementById("cart");
@@ -129,13 +135,14 @@ const showCart = () => {
             </tr>`
         )
 
-        localStorage.setItem("carrinho", JSON.stringify(carrinho))
         for (i = 0; i < carrinho.length; i++) {
             document.getElementById("remove" + (i + 1)).addEventListener("click", removeItem)
         }
+        localStorage.setItem("carrinho", JSON.stringify(carrinho))
     }
 }
 
+// Função para adicionar um item ao carrinho ao clicar no botão comprar de cada card
 const addToCart = ({ target }) => {
     let id = target.id.split("").pop();
     cursos[id].onCart = true;
@@ -150,6 +157,7 @@ const addToCart = ({ target }) => {
     showCart();
 }
 
+// Função para salvar o carrinho no localStorage
 const setCart = (obj) => {
     let id = obj.id;
     cursos[id].onCart = true;
@@ -157,10 +165,12 @@ const setCart = (obj) => {
     btn.setAttribute("disabled", '');
 }
 
+// Varre o array cursos e adiciona Escutador de Evento para cada botão comprar de cada card
 for (i = 0; i < cursos.length; i++) {
     document.getElementById('curso' + i).addEventListener("click", addToCart)
 }
 
+// Função para montar o carrinho à partir de informações que estavam no localStorage
 const buildCart = () => {
     const cart = JSON.parse(localStorage.getItem("carrinho"));
     for (const item of cart){
@@ -170,6 +180,7 @@ const buildCart = () => {
     showCart();
 }
 
-if(localStorage.getItem("carrinho")){
+// Verifica se a chave carrinho existe, e 
+if(localStorage.getItem("carrinho") && localStorage.getItem("carrinho") !== "[]"){
     buildCart();
 }
