@@ -1,3 +1,43 @@
+.header-bg::before{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50%;
+    width: 100%;
+    background-image: url("../images/header_bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+.header-text {
+    position: absolute;
+    top: 40px;
+    padding-left: 25px;
+}
+
+.card-image{
+    /* transform: translate(-17px); */
+    object-fit: cover;
+    height: 300px;
+}
+
+.payment-card-image{
+    height: 50px;
+    width: 50px;
+}
+
+.payment-image{
+    object-fit: cover;
+    height: 50px;
+    border-radius: 5px;
+
+}
+
 #cart, #payment, #confirmation{
     display: none;
 }
@@ -7,7 +47,7 @@
 }
 
 .card_finalizarCompra {
-    aspect-ratio: 86.6/53.88;
+    aspect-ratio: 86.6 / 53.88;
     padding: 22px;
     background-color: #C4C4C4;
     border-radius: 20px;
@@ -60,4 +100,14 @@
 
 #creditCardNumber{
     font-size: 20px;
+}
+
+.w-30{
+    width: 30%;
+}
+.w-66{
+    width: 66%;
+}
+#home{
+    cursor: pointer;
 }

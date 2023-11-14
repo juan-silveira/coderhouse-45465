@@ -1,22 +1,24 @@
 class Curso {
-    constructor(id, name, price, description) {
+    constructor(id, name, price, description, url) {
         this.id = id;
         this.name = name;
         this.price = parseFloat(price);
         this.description = description;
+        this.img = url;
         this.onCart = false;
     }
 }
 
 let cursos = [];
 let carrinho = [];
+let tValue = 0;
 
 //Popula o array de cursos com todos os cursos
-cursos.push(new Curso("0","Desenvolvimento Web", 199.50, "Curso criação de site com HTML, CSS, GIT, JavaScript, mercado programação, projeto final. Conhecimentos essenciais para desenvolvimento web."));
-cursos.push(new Curso("1","Javascript", 249.50, "Curso aborda fundamentos de linguagem de programação, jQuery, AJAX e desenvolvimento web interativo, preparando para frameworks JavaScript."));
-cursos.push(new Curso("2","React", 149.50, "Curso ensina pensamento em React JS, design eficiente, Firebase, prototipagem. Desenvolvimento de aplicações SPA focado no usuário final."));
-cursos.push(new Curso("3","Backend", 499.50, "Curso ensina desenvolvimento moderno com Node.js, MongoDB, Javascript assíncrono, NoSQL e criação de robustas aplicações de back end escaláveis."));
-cursos.push(new Curso("4","Figma", 149.50, "Curso focado no Figma para design UX/UI. Requer conhecimento prévio em design, grids, dark patterns e acessibilidade. Habilidades em telas mobile first."));
+cursos.push(new Curso("0", "Desenvolvimento Web", 199.50, "Curso criação de site com HTML, CSS, GIT, JavaScript, mercado programação, projeto final. Conhecimentos essenciais para desenvolvimento web.", "images/html.webp"));
+cursos.push(new Curso("1", "Javascript", 249.50, "Curso aborda fundamentos de linguagem de programação, jQuery, AJAX e desenvolvimento web interativo, preparando para frameworks JavaScript.", "images/javascript.png"));
+cursos.push(new Curso("2", "React", 149.50, "Curso ensina pensamento em React JS, design eficiente, Firebase, prototipagem. Desenvolvimento de aplicações SPA focado no usuário final.", "images/react.webp"));
+cursos.push(new Curso("3", "Backend", 499.50, "Curso ensina desenvolvimento moderno com Node.js, MongoDB, Javascript assíncrono, NoSQL e criação de robustas aplicações de back end escaláveis.", "images/backend.avif"));
+cursos.push(new Curso("4", "Figma", 149.50, "Curso focado no Figma para design UX/UI. Requer conhecimento prévio em design, grids, dark patterns e acessibilidade. Habilidades em telas mobile first.", "images/figma.png"));
 
 const cursosCards = document.getElementById("cursos");
 const cartNumber = document.getElementById("cart-number")
@@ -31,12 +33,16 @@ const createElement = (tag, classNames) => {
 // Monta os cards dos cursos
 cursos.forEach((e, i) => {
     cursosCards.insertAdjacentHTML("beforeend", `
-    <div class="col-md-4 mt-4">
+    <div class="col-md-3 mt-4">
         <div class="card">
-            <div class="card-header"><b>Curso ${e.name}</b></div>
-            <div class="card-body">${e.description}</div>
-            <div class="card-footer">
-                <button class="btn btn-success" id="curso${i}">Comprar por ${e.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</button>
+            <div class="card-header p-0"><img class="card-image w-100" src="${e.img}" alt="${e.name}"></div>
+            <div class="card-body">
+            <p class="text-center"><b>${e.name}</b></p>
+            <span class="badge bg-success p-2">${e.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+            <p class="mt-3">${e.description}</p>
+            </div>
+            <div class="card-footer bg-dark d-flex justify-content-center">
+                <button class="btn btn-success" id="curso${i}">Comprar</button>
             </div>
         </div>
     </div>
@@ -91,7 +97,7 @@ const showCart = () => {
     const cart = document.getElementById("cart");
     cursos.forEach(e => {
         if (e.onCart == true) {
-            carrinho.push({id:e.id, name: e.name, price: e.price });
+            carrinho.push({ id: e.id, name: e.name, price: e.price, img: e.img});
         }
     });
     if (carrinho.length == 0) {
@@ -104,6 +110,7 @@ const showCart = () => {
     } else {
         cart.style.display = "block";
         const cartTHead = document.getElementById("cartTHead");
+        const paymentTHead = document.getElementById("paymentTHead");
         cartTHead.innerHTML = "";
         cartTHead.innerHTML = `<thead>
             <tr class="text-center">
@@ -113,9 +120,19 @@ const showCart = () => {
                 <th scope="col">Remover</th>
             </tr>
         </thead>`;
+        paymentTHead.innerHTML = "";
+        paymentTHead.innerHTML = `<thead>
+            <tr class="text-center">
+                <th scope="col">#</th>
+                <th scope="col">Curso</th>
+                <th scope="col">Preço</th>
+            </tr>
+        </thead>`;
+        tValue = 0;
         const cartTBody = document.getElementById("cartTBody");
+        const paymentTBody = document.getElementById("paymentTBody");
         cartTBody.innerHTML = "";
-        var tValue = 0;
+        paymentTBody.innerHTML = "";
         carrinho.forEach((e, i) => {
             cartTBody.insertAdjacentHTML("beforeend", `
             <tr class="text-center">
@@ -124,9 +141,24 @@ const showCart = () => {
                 <td>${e.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
                 <td class="remove" index="${i + 1}" id="remove${i + 1}"><i class="bi bi-trash text-danger"></i></td>
             </tr>`)
+            paymentTBody.insertAdjacentHTML("beforeend", `
+            <tr class="text-center">
+                <td><div class="card bg-dark payment-card-image"><img class="payment-image" src="${e.img}" alt="${e.name}"></div></td>
+                <td>${e.name}</td>
+                <td>${e.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+            </tr>`)
             tValue += e.price;
+
         })
         cartTBody.insertAdjacentHTML("beforeend", `
+            <tr class="text-center">
+                <th scope="row"></th>
+                <td class="fw-bold fs-5">TOTAL:</td>
+                <td class="fw-bold fs-5">${tValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+                <td></td>
+            </tr>`
+        )
+        paymentTBody.insertAdjacentHTML("beforeend", `
             <tr class="text-center">
                 <th scope="row"></th>
                 <td class="fw-bold fs-5">TOTAL:</td>
@@ -173,7 +205,7 @@ for (i = 0; i < cursos.length; i++) {
 // Função para montar o carrinho à partir de informações que estavam no localStorage
 const buildCart = () => {
     const cart = JSON.parse(localStorage.getItem("carrinho"));
-    for (const item of cart){
+    for (const item of cart) {
         setCart(item)
     }
     cartNumber.innerText = quantidadeCursos(cursos);
@@ -181,6 +213,49 @@ const buildCart = () => {
 }
 
 // Verifica se a chave carrinho existe e se ela não é vazia, e se atender, constrói o carrinho
-if(localStorage.getItem("carrinho") && localStorage.getItem("carrinho") !== "[]"){
+if (localStorage.getItem("carrinho") && localStorage.getItem("carrinho") !== "[]") {
     buildCart();
 }
+
+const parcelas = document.getElementById("parcelas");
+const getParcelas = () => {
+    const x2 = (tValue/2).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    const x3 = (tValue/3).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    const tot = tValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    for (i = 0; i < 2; i++) {
+        parcelas.innerHTML= `
+        <option value="1x ${tot}">1x ${tot}</option>
+        <option value="2x ${x2}">2x ${x2}</option>
+        <option value="3x ${x3}">3x ${x3}</option>
+        `
+    }
+}
+
+const proceedToPayment = () => {
+    getParcelas();
+    document.getElementById("header").style.display = "none";
+    document.getElementById("gridCursos").style.display = "none";
+    document.getElementById("cart").style.display = "none";
+    document.getElementById("payment").style.display = "block";
+}
+
+const closeCart = document.getElementById("close-cart");
+closeCart.addEventListener("click", proceedToPayment)
+
+const showConfirmation = () => {
+    document.getElementById("cart-number").innerHTML = 0;
+    document.getElementById("header").style.display = "none";
+    document.getElementById("gridCursos").style.display = "none";
+    document.getElementById("cart").style.display = "none";
+    document.getElementById("payment").style.display = "none";
+    document.getElementById("confirmation").style.display = "block";
+    document.getElementById("confirmation-name").innerHTML = document.getElementById("nome").value;
+    document.getElementById("confirmation-email").innerHTML = document.getElementById("email").value;
+    document.getElementById("confirmation-total").innerHTML = tValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    document.getElementById("confirmation-parcelas").innerHTML = parcelas.value;
+    document.getElementById("confirmation-card").innerHTML = document.getElementById("creditCardNumber").value.slice(-4);
+}
+
+const confirmationButton = document.getElementById("confirmation-button");
+confirmationButton.addEventListener("click", showConfirmation);
+

@@ -15,11 +15,11 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js" defer></script>
 
     <script src="scripts/index.js" defer></script>
-    <title>Desafio Obrigatório Aula 14</title>
+    <title>Projeto Alpha D - Home</title>
 </head>
 
 <body class="bg-dark">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <img src="images/logo.png" alt="Bootstrap" width="100">
@@ -32,7 +32,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active fw-bold" aria-current="page" href="">Home</a>
                     </li>
                     <!-- <li class="nav-item">
                         <a class="nav-link" href="#gridCursos">Cursos</a>
@@ -49,38 +49,57 @@
             </div>
         </div>
     </nav>
-    <main main class="container mt-3">
+    <main main class="">
         <!-- Título do Trabalho -->
-        <header class="text-center text-white">
-            <h1>Desafio Obrigatório Aula 14</h1>
+        <header class="text-white header-bg py-5 px-3" id="header">
+            <div class="row">
+                <div class="col col-md-5 mr-5">
+                    <h1>Descubra como desenvolver suas habilidades digitais com foco no trabalho</h1>
+                </div>
+            </div>
+            <div class="col col-md-5 mr-5 mt-5">
+                <p>Aprenda no seu próprio ritmo com nossos conteúdos e suporte de tutores digitais. Tire todas as
+                    dúvidas que atrapalham seu desenvolvimento profissional.</p>
+            </div>
         </header>
 
         <!-- Sessão de Cursos -->
-        <section class="text-center text-white" id="gridCursos">
-            <h3 class="mt-5">Escolha os cursos para comprar:</h3>
+        <section class="container text-white" id="gridCursos">
+            <h3 class="mt-5 text-center">Escolha os cursos para comprar:</h3>
             <div class="row mt-5" id="cursos"></div>
         </section>
 
         <!-- Sessão do Carrinho -->
 
-        <section id="cart">
+        <section class="container" id="cart">
             <h3 class="mt-5 text-white text-center" id="cartTitle">Carrinho:</h3>
             <table class="table table-responsive table-hover mt-5" id="cart-table">
                 <thead id="cartTHead"></thead>
                 <tbody class="table-dark text-white" id="cartTBody"></tbody>
             </table>
-            <!-- <div class="d-flex justify-content-center">
-                <button class="btn btn-warning" id="close-cart">Finalizar Compra</button>
-            </div> -->
+            <div class="d-flex justify-content-center">
+                <a class="btn btn-warning" id="close-cart" href="#">Finalizar Compra</a>
+            </div>
         </section>
 
         <!-- Sessão do Pagamento -->
-        <section id="payment">
-            <h3 class="mt-5 text-white text-center">Finalizar compra:</h3>
+        <section class="container" id="payment">
+            <div class="row">
+                <div class="col-lg-5 d-flex justify-content-center mt-5">
+                    <a class="btn btn-outline-light" href="">← Voltar para as compras</a>
+                </div>
+                <div class="col-lg-7 mt-5">
+                    <h3 class="text-white text-center">Finalizar compra:</h3>
+                </div>
+            </div>
             <div class="justify-content-between finalizarCompra row text-white mt-5">
                 <div class="cursos_finalizarCompra col-lg-4">
                     <div class="total">
-                        <p>Total</p>
+                        <p class="text-center">Total</p>
+                        <table class="table table-responsive table-hover mt-2" id="payment-table">
+                            <thead id="paymentTHead"></thead>
+                            <tbody class="table-dark text-white" id="paymentTBody"></tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="dadosPessoais_finalizarCompra col-lg-7">
@@ -100,11 +119,7 @@
                         </div>
                         <div class="form-group parcelas">
                             <label for="parcelas">Quantidade de Parcelas</label>
-                            <select class="form-control" name="" id="parcelas">
-                                <option value=""></option>
-                                <option value=""></option>
-                                <option value=""></option>
-                                <option value=""></option>
+                            <select class="form-control" name="parcelas" id="parcelas">
                             </select>
                         </div>
                         <div>
@@ -118,30 +133,34 @@
                                         <div class="row">
                                             <div class="col-12">
                                                 <label for="creditCardName" class="d-block">Nome</label>
-                                                <input class="w-50" type="text" name="" id="creditCardName" placeholder="JUAN SILVEIRA">
+                                                <input class="w-66" type="text" name="" id="creditCardName"
+                                                    placeholder="JUAN SILVEIRA" value="JUAN SILVEIRA" required>
                                             </div>
                                             <div class="col-12 mt-3">
                                                 <label for="creditCardNumber" class="d-block">Número do cartão</label>
-                                                <input class="creditCardNumber w-50" type="text" name="" id="creditCardNumber" placeholder="1213 91011 5678 1234">
+                                                <input class="creditCardNumber w-66" type="text" name=""
+                                                    id="creditCardNumber" placeholder="1213 9111 5678 1234"
+                                                    value="1213 9111 5678 1234" required>
                                             </div>
                                         </div>
                                         <div class="row mt-5">
                                             <div class="col">
                                                 <label for="creditCardDate" class="d-block">Validade</label>
-                                                <input class="w-25" type="text" name="" id="creditCardDate" placeholder="00/00">
+                                                <input class="w-30" type="text" name="" id="creditCardDate"
+                                                    placeholder="00/00" value="12/23" required>
                                             </div>
                                             <div class="col">
                                                 <label for="creditCardCVC" class="d-block">CVC</label>
-                                                <input class="w-25" type="text" name="" id="creditCardCVC" placeholder="000">
+                                                <input class="w-30" type="text" name="" id="creditCardCVC"
+                                                    placeholder="000" value="123" required>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <input class="btn btn-primary" type="submit" value="Confirmar compra">
+                        <div class="form-group d-flex justify-content-center">
+                            <a class="btn btn-primary" href="#" id="confirmation-button">Confirmar compra</a>
                         </div>
                     </form>
                 </div>
@@ -150,14 +169,22 @@
 
         <!-- Sessão da Confirmação do Pagamento -->
         <section id="confirmation">
-
+            <div class="container">
+                <div class="card mt-5 p-2">
+                    <h3>Obrigado <span class="text-success" id="confirmation-name"></span> por estudar com a Alpha D!</h3>
+                    <h5 class="mt-2">O pagamento foi realizado com sucesso!</h5>
+                    <p class="mt-3">Você receberá seus cursos no email: <span class="text-success" id="confirmation-email"></span></p>
+                    <p>O pagamento de <span id="confirmation-total"></span> foi feito em <span id="confirmation-parcelas"></span></p>
+                    <p>Com o cartão número: **** - **** - **** - <span id="confirmation-card"></span></p>
+                </div>
+            </div>
         </section>
 
 
     </main>
 
     <!-- Footer -->
-    <div class="container">
+    <div class="container-fluid">
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
             <div class="col-md-4 d-flex align-items-center text-white">
                 <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1 text-white">
